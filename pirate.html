@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>Treasures</title>
-  <style>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
     body {
       background-color:lavenderblush;
     }
@@ -21,16 +23,60 @@
             height: 100%;
           }
           
+    .h1{
+            color:olivedrab;
+            font-family: cursive;
+            padding: 4px;
+            margin-bottom: 08px;
+        }
+
+        .menu {
+            background-color: palevioletred;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .menu-item {
+            font-family: monospace;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .menu-item:hover {
+            background-color: darksalmon;
+            color: lightseagreen;
+            text-shadow: 1.5px;
+        }
+
+        .search {
+            background-color: aqua;
+        }
+
+        .check {
+            background-color: pink;
+        }
+
+        .score {
+            background-color: aquamarine;
+        }
+
+        .help {
+            background-color: violet;
+        }
+
 </style>
   
 </head>
 <body>
     <h2>Find the treasure by Sai Swathi Thota</h2>
-    <p>Click on the locations to search for treasure, beware the traps</p>
-    <div style="background-color:lightseagreen" id="locations">Number of locations checked is zero.</div><br>
-    <div style="background-color:bisque" id="penalty">Penalty is zero.</div>
-    <p style="background-color:lightsalmon">Click for help.<br></p><br>
-    <div style="background-color:plum" id="help">Help report</div>
+    <div class="row menu">
+      <p>Click on the locations to search for treasure, beware the traps</p>
+      <div style="background-color:lightseagreen" id="locations">Number of locations checked is zero.</div><br>
+      <div style="background-color:bisque" id="penalty">Penalty is zero.</div>
+      <p style="background-color:lightsalmon">Click for help.<br></p><br>
+      <div style="background-color:plum" id="help">Help report</div>
+      <button onclick="restart()" type="submit" class="btn btn-warning">random</button>
+  </div>
 
     <div class="container">
       <div class="game-row">
@@ -69,5 +115,87 @@
         <div class="game-location"><img src="Treasure.jpg" alt="Treasure loaction"></div>
       </div>
   </div>
+  <script>
+    let ids = ['img0','img1','img2','img3','img4','img5','img6','img7','img8','img9','img10','img11','img12','img13','img14','img15','img16','img17','img18','img19','img20','img21','img22','img23','img24'];
+     let checkCount = 0
+     let penalty = 0
+     let lastCheck = 0
+     let treasureLocation = 5
+     let trapLocation = 18
+     let gameOver = false
+     let checkElement = document.getElementById('check')
+     let penalElement = document.getElementById('penalty')
+     function check(position) {
+        if (gameOver == true)
+        {
+            return
+        }
+        let imageID = ids[position]
+        let imageElement = document.getElementById(imageID)
+        checkCount =checkCount + 1
+        penalty = penalty + 1
+        if (position == treasureLocation)
+        {
+            document.getElementById(ids[position]).src = "SomeTreasure.jpg";
+            gameOver = true;
+            penalty = penalty - 3;
+        }
+        else if (position == trapLocation) 
+        {
+            document.getElementById(ids[position]).src = "trap.jpg";
+            gameOver = true;
+            penalty = penalty + 4;
+        }
+        else 
+        {
+            document.getElementById(ids[position]).src = "pirate.png"
+        }
+        document.getElementById("locations").innerHTML = "Number of locations checked is " + checkCount
+        document.getElementById("penalty").innerHTML = "Penalty is " + penalty
+        lastCheck = position;
+     }
+     function help() {
+        let lastRow = Math.floor(lastCheck / 5);
+        let lastCol = Math.floor(lastCheck % 5);
+        let trapRow =  Math.floor(trapLocation / 5);
+        let treasureRow = Math.floor(treasureLocation / 5);
+        let treasureCol = Math.floor(treasureLocation % 5);
+        let trapCol =  Math.floor (trapLocation % 5);
+        
+
+        if ((Math.abs(trapRow - lastRow) <= 1) && (Math.abs(trapCol - lastCol) <= 1)) 
+        { 
+            document.getElementById("help").innerHTML = "Help report: Can smell it"
+        }
+        else if ((Math.abs(treasureRow - lastRow) <= 1) && (Math.abs(treasureCol - lastCol) <= 1)) 
+        {
+            document.getElementById("help").innerHTML = "Help report: Close Matie"
+        }
+        else
+        {
+            document.getElementById("help").innerHTML = "Help report: Step faster"
+        }
+
+        penalty = penality + 2;
+        document.getElementById("penalty").innerHTML = "Penalty is " + penalty
+    }
+    function restart() 
+    {
+        penalty=0;
+        checkCount=0;
+        document.getElementById("locations").innerHTML = "Number of locations checked is "+ checkCount
+        document.getElementById("penalty").innerHTML = "penalty is "+ penalty
+        treasureLocation = Math.floor(Math.random() * 25)
+        trapLocation = Math.floor(Math.random() * 25)
+        
+        for(let m=0;m<25;m++){
+            docume.getElementById(ids[i]).src="treasure.jpg"
+
+        }
+            
+       
+        
+    }
+</script>
 </body>
 </html>

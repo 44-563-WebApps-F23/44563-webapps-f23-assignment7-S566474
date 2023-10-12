@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Timeout page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+
+    h2 {
+        color:aqua;
+        font-weight: bold;
+        font-family:sans-serif;
+        margin-bottom: 7px;
+        padding: 7px;
+        text-shadow: 1.5px 1.5px #2a008b;
+       
+    }
+
+    .menu 
+    {
+        background-color:#14ff89;
+        padding: 13px;
+        color:red;
+        margin-left: 300px;
+        text-align: center;
+        width: 450px;
+        
+    }
+
+    #target 
+    {
+        background-color:lightpink;
+        font-weight: 700;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin: 6px;
+        font-size: 17px;
+        
+    }
+
+    #counter 
+    {
+        background-color:#008ffc;
+        font-weight: 700;
+        font-family: monospace;
+        margin:6px;
+        font-size: 17px;
+        
+    }
+
+    button
+    {
+        margin: 23px;
+    }
+
+</style>
+</head>
+<body>
+    <div class="container text-center">
+  <h2>Sai Swathi Thota speed check</h2>
+  <div class="row menu">
+  <div class="col-md"> <p id="target">Your time</p></div>
+  <div class="col-md"> <p id="counter">Count</p></div>
+</div>
+  <div class="container text-center">
+    <button class="btn btn-danger" type="submit" onclick="startTime()">Start Timer</button>
+    <button class="btn btn-warning" type="submit" onclick="recordTime()">React</button>
+    
+</div>
+</div>
+  
+  <script> 
+   var reactTime = undefined;
+            function  recordTime()
+            {
+                reactTime = Date.now()
+                console.log(reactTime)
+            }
+            function startTime() 
+            {
+                let countdown = Math.floor(Math.random() * 9) + 2;
+                console.log()
+                for(let i = 0; i < countdown; i++)
+                {
+                    setTimeout(() => {
+                        document.getElementById("counter").innerHTML = i
+                    }, ((countdown-1-i)*1000));
+                }
+                setTimeout(() => {
+                    if(reactTime == undefined) 
+                    {
+                        document.getElementById("target").innerHTML = "Too Slow"
+                    } 
+                    else
+                    {
+                        let endTime = Date.now()
+                   
+                        document.getElementById("target").innerHTML = "Time was " + ( endTime - reactTime)
+                    }
+                }, 8000);
+            }
+  </script>
+
+</body>
+</html>

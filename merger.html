@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html> <head> 
+    <title>merger web page</title>
+    <style>
+     h2
+            {
+               color:aqua;
+               font-family:monospace;
+               padding: 15px;
+               margin-bottom: 8px;
+			   background-color:darkmagenta;
+			   margin: 0px 250px;
+            }
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+    button {
+        margin: 23px;
+    }
+    #inputElement {
+        padding: 15px;
+        width: 250px;
+        margin-left: 350px;
+    }
+    .merger {
+        color:navy;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body style="background-color:rgb(127, 255, 212);">
+    <h2>Sai Swathi Thota  builds a merger</h2>
+		<div class="flex-container" id="target">
+		  <div class="merger"style="font-family:sans-serif">row item 1</div>   
+		  <div class="merger"style="font-family:sans-serif">row item 2</div>  
+		  <div class="merger"style="font-family:sans-serif">row item 3</div>  
+		</div>
+	<br>
+	<div>
+    <input type="text" id="text_input" name="text_input" /><br />
+	<button onclick="makeNewDiv()">Add end</button>
+    
+    <button class="btn btn-warning" onclick="addFront()">Add front</button>
+    <button class="btn btn-info" onclick="remove()">Remove</button>
+    </div>
+    <div>
+        <button class="btn btn-primary" onclick="swap()">swap</button>
+    </div>
+</body>
+<script>
+	function makeNewDiv(){
+		/* make the div and its text */
+		let element = document.createElement("div")
+        let value = document.getElementById("text_input").value;
+		element.innerHTML = value;
+		element.className = "merger"
+
+		/* add it to the container */
+		let container = document.getElementById('target')
+		container.appendChild(element)
+		
+	}
+    function addFront() 
+        { 
+         let element = document.createElement("div")
+        let value = document.getElementById("text_input").value;
+		element.innerHTML = value;
+		element.className = "merger"
+        let container = document.getElementById('target')
+		container.insertBefore(element,container.firstChild);
+        }
+        function remove() 
+        {
+            let mergerItems = document.getElementsByClassName("merger");
+            let length = mergerItems.length;
+
+            if (length > 0)
+            {
+              
+                mergerItems[Math.floor(length/2)].remove();
+                
+                
+            }
+        }
+        function swap()
+        {
+        var mergerItems = document.getElementsByClassName("merger");
+        let element = document.createElement("div");
+        let container = document.getElementById('target')
+        var l= mergerItems.length;
+        var random = Math.floor(Math.random()*(l));
+        console.log(random);
+		element.innerHTML = mergerItems[random].textContent;
+        element.className = "merger"
+        mergerItems[random].remove()
+        container.insertBefore(element,mergerItems[0])
+        }
+
+</script>
+</html>	
